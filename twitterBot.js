@@ -15,4 +15,24 @@ let retweet = () => {
       result_type: 'recent',
       lang: 'en'
   }
+  Twitter.get('search/tweets', params, (err, data) => {
+      if (!err) {
+        let rtId = data.statuses[0].id_str;
+        Twitter.post('statuses/retweet/:id', {
+          id: rtId
+        }, (err, response) => {
+          if (response) {
+            console.log('Successfully retweeted');
+          }
+          if (err) {
+            console.log(err);
+            console.log(rtId);
+          }
+        });
+      }
+      else {
+        console.log('Could not search tweets.');
+      }
+  });
 } 
+retweet();
