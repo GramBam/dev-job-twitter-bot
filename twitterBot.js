@@ -36,3 +36,4 @@ let retweet = () => {
   });
 } 
 retweet();
+setInterval(retweet, 60000);
